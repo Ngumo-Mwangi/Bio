@@ -238,6 +238,27 @@ section, .hero-header, #chatbot {
       section h2 { font-size: 1.5em; }
       .skills span { font-size: 0.8em; }
     }
+
+    @media (max-width:768px){
+
+.section-nav{
+flex-direction:column;
+align-items:center;
+gap:8px;
+padding:10px;
+}
+
+.section-nav a{
+font-size:0.9em;
+padding:8px 14px;
+}
+
+body{
+padding-top:140px;
+}
+
+}
+
   </style>
 
 </head>
@@ -250,7 +271,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
   background: #fff; /* your base background */
 }
@@ -290,6 +311,75 @@ body {
 .main-content {
   position: relative;
   z-index: 1; 
+}
+@media (max-width:600px){
+
+.hero-header{
+height:250px;
+width:100%;
+padding:10px;
+}
+
+.hero-content h1{
+font-size:1.8em;
+}
+
+.hero-content h2{
+font-size:1.1em;
+}
+
+}@media (max-width:700px){
+
+.floating-social{
+display:none;
+}
+
+}
+@media (max-width:600px){
+
+#chatbot{
+width:90%;
+right:5%;
+bottom:70px;
+}
+
+#chatbot-toggle{
+right:15px;
+bottom:15px;
+}
+
+#music-toggle{
+bottom:120px;
+}
+
+}#travel-map{
+width:100%;
+height:300px;
+border-radius:12px;
+margin-top:10px;
+}@media (max-width:500px){
+
+.hobbies-grid{
+grid-template-columns:1fr;
+}
+
+}header{
+margin-top:60px;
+}/* Smooth transitions for all sections, buttons, images, and cards */
+* {
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}/* Initial hidden state */
+.fade-section {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+/* Visible state */
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
 
@@ -533,7 +623,7 @@ window.onscroll = function() {
   <a href="https://www.linkedin.com/in/ngumo-mwangi/" class="linkedin"><i class="fab fa-linkedin"></i></a>
   <a href="https://www.instagram.com/Ngumo_Mwangi" class="instagram"><i class="fab fa-instagram"></i></a>
   <a href="https://twitter.com/Ngumo_Mwangii" class="twitter"><i class="fab fa-twitter"></i></a>
- 
+  <a href="https://github.com/Ngumo-Mwangi" class="github"><i class="fab fa-github"></i></a>
   <a href="https://www.facebook.com/NgumoMwangi" class="facebook"><i class="fab fa-facebook"></i></a>
   <a href="https://www.tiktok.com/@Ngumo_Mwangi" class="tiktok"><i class="fab fa-tiktok"></i></a>
   <a href="https://www.youtube.com/@Ngumo_Mwangi" class="youtube"><i class="fab fa-youtube"></i></a>
@@ -742,60 +832,70 @@ window.onscroll = function() {
     display: none; /* hide completely */
   }
 }
+/* Buttons & Nav */
+.section-nav a, .floating-social a, .project-card, .skills span {
+  transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.section-nav a:hover, .floating-social a:hover, .project-card:hover, .skills span:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}.hero-content h1, .hero-content h2.typing {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.hero-content.visible h1, .hero-content.visible h2.typing {
+  opacity: 1;
+  transform: translateY(0);
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+
   const floatingSocial = document.querySelector('.floating-social');
   const container = document.querySelector('.container');
   const header = document.querySelector('header');
   const footer = document.querySelector('footer');
 
+  const icons = document.querySelectorAll('.floating-social a');
+
   function toggleFloatingSocial() {
+
     const scrollTop = window.scrollY;
     const windowHeight = window.innerHeight;
 
     const containerTop = container.offsetTop;
-    const containerBottom = container.offsetTop + container.offsetHeight;
-
-    const headerBottom = header.offsetTop + header.offsetHeight;
     const footerTop = footer.offsetTop;
 
-    // Show when viewport middle is inside container, but before footer
-    if(scrollTop + windowHeight/2 > containerTop && scrollTop + windowHeight/2 < footerTop) {
+    if(scrollTop + windowHeight/2 > containerTop && scrollTop + windowHeight/2 < footerTop){
+
       floatingSocial.classList.add('show');
+
     } else {
+
       floatingSocial.classList.remove('show');
+
     }
+
+    icons.forEach((icon, index) => {
+
+      const rotateAmount = Math.sin((scrollTop / 50) + index) * 5;
+
+      icon.style.transform =
+        `rotate(${rotateAmount}deg) scale(${floatingSocial.classList.contains('show') ? 1 : 0.8})`;
+
+    });
+
   }
 
   window.addEventListener('scroll', toggleFloatingSocial);
   window.addEventListener('resize', toggleFloatingSocial);
 
-  // Run once on load
   toggleFloatingSocial();
-});
 
-
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const windowHeight = window.innerHeight;
-
-  const containerTop = container.offsetTop;
-  const footerTop = footer.offsetTop;
-
-  // Show/hide sidebar
-  if(scrollTop + windowHeight/2 > containerTop && scrollTop + windowHeight/2 < footerTop) {
-    floatingSocial.classList.add('show');
-  } else {
-    floatingSocial.classList.remove('show');
-  }
-
-  // Rotate icons subtly based on scroll
-  icons.forEach((icon, index) => {
-    const rotateAmount = Math.sin((scrollTop / 50) + index) * 5; // max ±5deg
-    icon.style.transform = `translateY(-50%) translateX(${floatingSocial.classList.contains('show') ? '12px' : '-80px'}) rotate(${rotateAmount}deg) scale(${floatingSocial.classList.contains('show') ? 1 : 0.8})`;
-  });
 });
 </script>
 
@@ -1484,22 +1584,28 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
   </style>
 
   <script>
-    const map = L.map('travel-map').setView([0, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+document.addEventListener("DOMContentLoaded", function(){
 
-    const destinations = [
-      {name: "Nairobi, Kenya", coords: [-1.2921, 36.8219]},
-      {name: "Dallas, Embu", coords: [-0.5167, 37.4500]},
-      {name: "Tokyo, Japan", coords: [35.6762, 139.6503]}
-    ];
+const map = L.map('travel-map').setView([0, 0], 2);
 
-    destinations.forEach(d => {
-      L.marker(d.coords).addTo(map)
-        .bindPopup(`<b>${d.name}</b>`);
-    });
-  </script>
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const destinations = [
+ {name: "Nairobi, Kenya", coords: [-1.2921, 36.8219]},
+ {name: "Dallas, Embu", coords: [-0.5167, 37.4500]},
+ {name: "Tokyo, Japan", coords: [35.6762, 139.6503]}
+];
+
+destinations.forEach(d => {
+ L.marker(d.coords)
+  .addTo(map)
+  .bindPopup(`<b>${d.name}</b>`);
+});
+
+});
+</script>
 
 </section>
 
@@ -1581,6 +1687,7 @@ I aim to inspire and uplift communities.
       
 
       <div class="footer-social">
+        <a href="https://github.com/Ngumo-Mwangi"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/ngumo-mwangi/"><i class="fab fa-linkedin"></i></a>
         <a href="https://www.instagram.com/Ngumo_Mwangi"><i class="fab fa-instagram"></i></a>
         <a href="mailto:ngumowilfredmwangi@gmail.com"><i class="fas fa-envelope"></i></a>
@@ -1615,7 +1722,6 @@ I aim to inspire and uplift communities.
   backdrop-filter: blur(10px);
  
 }
-
 .chatbot-header {
   background: pink;
   color: #000;
@@ -1672,39 +1778,35 @@ toggle.addEventListener('click', () => {
 
 function getBotResponse(question){
 
-  question = question.toLowerCase();
+question = question.toLowerCase();
 
-  if(question.includes("skills")){
-    return "Ngumo Mwangi has skills in Drawing, Tattooing, Graphics, Video Creation, Songwriting, Fashion Design, Audio Engineering, IT, Event Production and Farming.";
-  }
+const responses = {
 
-  if(question.includes("projects")){
-    return "Current projects include Exquisite Tatu Nation, Intenzionale Fashion, and Audio Mix Sound Center.";
-  }
+skills: "Ngumo Mwangi has skills in Drawing, Tattooing, Graphics, Video Creation, Songwriting, Fashion Design, Audio Engineering, IT, Event Production and Farming.",
 
-  if(question.includes("education")){
-    return "Education includes St. Michael Primary School, Embu Urban Integrated Secondary School, and Jomo Kenyatta University of Agriculture and Technology.";
-  }
+projects: "Current projects include Exquisite Tatu Nation, Intenzionale Fashion, Audio Mix Sound Center and various creative technology ventures.",
 
-  if(question.includes("experience") || question.includes("work")){
-    return "Ngumo has worked with Exquisite Tatu Nation, Intenzionale Fashion, Audio Mix Sound Center, Ujenzi Art Shop, GKM Farming, and Mwanzi Lisi Construction.";
-  }
+education: "Education includes St. Michael Primary School, Embu Urban Integrated Secondary School, and Jomo Kenyatta University of Agriculture and Technology.",
 
-  if(question.includes("hobbies")){
-    return "Hobbies include art, tattooing, music creation, fashion design, technology exploration and farming.";
-  }
+experience: "Ngumo has worked with Exquisite Tatu Nation, Intenzionale Fashion, Audio Mix Sound Center, Ujenzi Art Shop, GKM Farming and Mwanzi Lisi Construction.",
 
-  if(question.includes("who") || question.includes("about")){
-    return "Ngumo Mwangi is a Creative Technologist, Entrepreneur, Artist and Innovator from Embu, Kenya.";
-  }
+hobbies: "Hobbies include tattooing, art, fashion design, video production, technology exploration, motorsports and outdoor activities.",
 
-  if(question.includes("contact")){
-    return "You can contact Ngumo through LinkedIn, Instagram, GitHub or other social platforms listed on the site.";
-  }
+contact: "You can contact Ngumo via LinkedIn, Instagram, GitHub or email from the contact section.",
 
-  return "Hello! I'm Ngumo Mwangi's assistant 🤖. Ask me about skills, projects, education, experience or hobbies.";
+about: "Ngumo Mwangi is a Creative Technologist, Entrepreneur and Artist from Embu, Kenya."
+};
+
+for(let key in responses){
+
+if(question.includes(key)){
+return responses[key];
 }
 
+}
+
+return "Ask me about Ngumo's skills, projects, education, experience or hobbies.";
+}
 input.addEventListener('keypress', (e) => {
 
   if(e.key === 'Enter' && input.value.trim() !== ''){
@@ -1734,10 +1836,21 @@ input.addEventListener('keypress', (e) => {
 
 });
 </script>
+  
     <audio id="bg-music" loop>
   <source src="assets/beat.mp3" type="audio/mp3">
 </audio>
 <button id="music-toggle">🎵</button>
+
+<script>
+document.addEventListener("click", function(){
+  const music = document.getElementById("bg-music");
+  if(music.paused){
+    music.volume = 0.3;
+    music.play();
+  }
+},{once:true});
+</script>
 <style>
   #music-toggle{
   position: fixed;
@@ -1992,8 +2105,60 @@ function scrollToTop(){
     behavior:"smooth"
   });
 }
+const revealElements = document.querySelectorAll("section");
+
+function revealOnScroll(){
+
+  const windowHeight = window.innerHeight;
+
+  revealElements.forEach(el => {
+
+    const elementTop = el.getBoundingClientRect().top;
+
+    if(elementTop < windowHeight - 120){
+      el.style.opacity = 1;
+      el.style.transform = "translateY(0)";
+    }
+
+  });
+
+}
+
+revealElements.forEach(el => {
+  el.style.opacity = 0;
+  el.style.transform = "translateY(40px)";
+  el.style.transition = "all 0.8s ease";
+});
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
 </script>
 
+<script>
+// Smooth fade-in for sections
+const fadeSections = document.querySelectorAll('section');
+
+function revealSections() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  fadeSections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    if (sectionTop < triggerBottom) {
+      section.classList.add('visible');
+      section.classList.add('fade-section'); // ensure initial class exists
+    }
+  });
+}
+
+window.addEventListener('scroll', revealSections);
+window.addEventListener('load', revealSections);
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.hero-content').classList.add('visible');
+});
+</script>
 
 <canvas id="confetti-canvas"></canvas>
 <div id="celebration-container"></div>
@@ -2237,6 +2402,8 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
+
+
 
 
 </body>
