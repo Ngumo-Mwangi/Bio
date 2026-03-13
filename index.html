@@ -220,7 +220,7 @@
 <body>
 
 
-<!-- <!-- NAVIGATION -->
+<!-- NAVIGATION -->
 <div class="section-nav">
   <a href="#home">Home</a>
   <a href="#core-identity">Core Identity</a>
@@ -383,6 +383,7 @@
 
 
   <div class="container">
+    
 <!-- ABOUT ME SECTION -->
 <section id="about-me">
 
@@ -575,6 +576,39 @@
 
 
 </section>
+
+
+    <script>
+      // VIDEOS
+      const videos = document.querySelectorAll('.section-video');
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          const video = entry.target;
+          if(entry.isIntersecting){
+           videos.forEach(video=>{
+  video.src = video.dataset.src; // load immediately
+  observer.observe(video);
+}); // load only when in view
+            if(!isMobile){
+              const playPromise = video.play();
+              if(playPromise!==undefined){ playPromise.catch(()=>{}); }
+            }
+          } else { video.pause(); }
+        });
+      }, { threshold:0.5 });
+
+      videos.forEach(video=>{
+        observer.observe(video);
+        if(isMobile){
+          // TAP TO PLAY ON MOBILE
+          video.addEventListener('click', ()=>{
+            if(video.paused){ video.play(); } else { video.pause(); }
+          });
+        }
+      });
+    </script>
     <!-- Core Identity -->
     <section id="core-identity">
       <h2><i class="fas fa-user"id="Core Identity"
@@ -821,67 +855,6 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
 </section>
 
 
-    <!-- Future Goals -->
-<section id="destinations">
-      <h2><i class="fas fa-rocket"></i>Destinations</h2>
-      <h4>Short-Term (6–12 months)</h4>
-      <ul>
-        <li>Strengthen Information Technology, creative, and leadership skills</li>
-        <li>Lead impactful projects in media, fashion, audio, tattooing, and technology</li>
-        <li>Expand mentorship and community engagement</li>
-        <li>Build strong professional & creative networks</li>
-      </ul>
-
-
-      <h4>Long-Term (5–10 years)</h4>
-      <ul>
-        <li>Expand mentorship and community engagement</li>
-        <li>Lead communities through faith, service, creativity, and technology</li>
-        <li>Establish sustainable ventures integrating media, fashion, agriculture, tattooing, IT, and community development</li>
-        <li>Become a role model for youth and emerging creatives</li>
-        <li>Continuous personal, spiritual, and professional growth</li>
-      </ul>
-
-      <h2>Mission</h2>
-
-<blockquote>
-“I am the way, the truth, and the life.”  
-<br>— John 14:6
-</blockquote>
-
-<p>
-My work is guided by faith, purpose and service. 
-Through creativity, technology and entrepreneurship, 
-I aim to inspire and uplift communities.
-</p>
-<h2>My Journey</h2>
-
-<ul class="timeline">
-
-<li>
-<span>2002</span>
-<p>Born in Embu, Kenya</p>
-</li>
-
-<li>
-<span>2010–2016</span>
-<p>Primary School – St Michael</p>
-</li>
-
-<li>
-<span>2017–2020</span>
-<p>High School – Embu Urban Integrated</p>
-</li>
-
-<li>
-<span>2021–Present</span>
-<p>University – JKUAT</p>
-</li>
-
-</ul>
-      
-    </section>
-
  <!-- Hobbies & Interests -->
 <section id="hobbies">
   <h2 class="section-title"><i class="fas fa-star"></i> Hobbies & Interests</h2>
@@ -1121,46 +1094,85 @@ I aim to inspire and uplift communities.
   </style>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Lazy load & auto play/pause videos
-      const videos = document.querySelectorAll('.section-video');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const video = entry.target;
-          if(entry.isIntersecting){
-            if(!video.src) video.src = video.dataset.src;
-            video.play();
-          } else {
-            video.pause();
-          }
-        });
-      }, { threshold: 0.5 });
+    document.addEventListener("DOMContentLoaded", function(){
 
-      videos.forEach(video => observer.observe(video));
-
-      // Leaflet Map
+      // MAP
       const map = L.map('travel-map').setView([0,0],2);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      const destinations = [
-        {name: "Nairobi, Kenya", coords: [-1.2921, 36.8219]},
-        {name: "Dallas, Embu", coords: [-0.5167, 37.4500]},
-        {name: "Tokyo, Japan", coords: [35.6762, 139.6503]}
-      ];
-      destinations.forEach(d => {
-        L.marker(d.coords).addTo(map).bindPopup(`<b>${d.name}</b>`);
-      });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap contributors'}).addTo(map);
+      const destinations=[{name:"Nairobi, Kenya", coords:[-1.2921,36.8219]},{name:"Dallas, Embu", coords:[-0.5167,37.4500]},{name:"Tokyo, Japan", coords:[35.6762,139.6503]}];
+      destinations.forEach(d => L.marker(d.coords).addTo(map).bindPopup(`<b>${d.name}</b>`));
     });
   </script>
 </section>
+
+    <!-- Future Goals -->
+<section id="destinations">
+      <h2><i class="fas fa-rocket"></i>Destinations</h2>
+      <h4>Short-Term (6–12 months)</h4>
+      <ul>
+        <li>Strengthen Information Technology, creative, and leadership skills</li>
+        <li>Lead impactful projects in media, fashion, audio, tattooing, and technology</li>
+        <li>Expand mentorship and community engagement</li>
+        <li>Build strong professional & creative networks</li>
+      </ul>
+
+
+      <h4>Long-Term (5–10 years)</h4>
+      <ul>
+        <li>Expand mentorship and community engagement</li>
+        <li>Lead communities through faith, service, creativity, and technology</li>
+        <li>Establish sustainable ventures integrating media, fashion, agriculture, tattooing, IT, and community development</li>
+        <li>Become a role model for youth and emerging creatives</li>
+        <li>Continuous personal, spiritual, and professional growth</li>
+      </ul>
+
+      <h2>Mission</h2>
+
+<blockquote>
+“I am the way, the truth, and the life.”  
+<br>— John 14:6
+</blockquote>
+
+<p>
+My work is guided by faith, purpose and service. 
+Through creativity, technology and entrepreneurship, 
+I aim to inspire and uplift communities.
+</p>
+<h2>My Journey</h2>
+
+<ul class="timeline">
+
+<li>
+<span>2002</span>
+<p>Born in Embu, Kenya</p>
+</li>
+
+<li>
+<span>2010–2016</span>
+<p>Primary School – St Michael</p>
+</li>
+
+<li>
+<span>2017–2020</span>
+<p>High School – Embu Urban Integrated</p>
+</li>
+
+<li>
+<span>2021–Present</span>
+<p>University – JKUAT</p>
+</li>
+
+</ul>
+      
+    </section>
+
 
 </div>
 
  
 <footer>
   <div class="footer-container">
+
     
 
     <!-- About -->
@@ -1398,6 +1410,7 @@ footer{
 .footer-section h2{
   font-size:26px;
   margin-bottom:10px;
+  font-family: 'Creepster', cursive;
 }
 
 .footer-section h3{
@@ -1902,6 +1915,63 @@ window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  // Select ALL videos that should use this system
+  const videos = document.querySelectorAll('.section-video');
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const video = entry.target;
+
+      if(entry.isIntersecting){
+
+        // Lazy load video when visible
+        if(video.dataset.src && !video.src){
+          video.src = video.dataset.src;
+        }
+
+        // Autoplay on desktop
+        if(!isMobile){
+          const playPromise = video.play();
+
+          if(playPromise !== undefined){
+            playPromise.catch(()=>{});
+          }
+        }
+
+      } 
+      else{
+        video.pause();
+      }
+
+    });
+  }, { threshold:0.5 });
+
+
+  // Apply observer to every video
+  videos.forEach(video=>{
+
+    observer.observe(video);
+
+    // Mobile tap-to-play
+    if(isMobile){
+      video.addEventListener("click", ()=>{
+        if(video.paused){
+          video.play();
+        } else{
+          video.pause();
+        }
+      });
+    }
+
+  });
+
 });
 </script>
 
