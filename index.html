@@ -357,7 +357,8 @@ width:100%;
 height:300px;
 border-radius:12px;
 margin-top:10px;
-}@media (max-width:500px){
+}
+@media (max-width:500px){
 
 .hobbies-grid{
 grid-template-columns:1fr;
@@ -381,6 +382,7 @@ margin-top:60px;
   opacity: 1;
   transform: translateY(0);
 }
+
 </style>
 
 <script>
@@ -519,67 +521,135 @@ window.addEventListener('resize', () => {
 
 
 <style>
-.section-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 15px 20px;
-  background: #111;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-  transition: all 0.3s ease;
+
+/* ================= NAVIGATION ================= */
+
+.section-nav{
+display:flex;
+flex-wrap:nowrap;                 /* keep items in one line */
+justify-content:flex-start;
+align-items:center;
+gap:12px;
+
+padding:14px 20px;
+background:#111;
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+
+z-index:9999;
+box-shadow:0 3px 10px rgba(0,0,0,0.4);
+
+overflow-x:auto;                  /* scroll if small screen */
+scrollbar-width:none;
+
+transition:all .35s cubic-bezier(.19,1,.22,1);
 }
 
-.section-nav.shrink {
-  padding: 8px 20px;       /* reduce vertical padding */
-  box-shadow: 0 3px 15px rgba(0,0,0,0.6);
-}
-.section-nav a {
-  text-decoration: none;
-  background: pink;
-  color: #000;
-  padding: 10px 18px;
-  border-radius: 25px;
-  font-weight: 600;
-  font-family: 'Creepster', cursive; /* Scary font for titles */
-  font-size: 1em;
-  transition: all 0.3s ease; /* already present */
+/* hide scrollbar */
+.section-nav::-webkit-scrollbar{
+display:none;
 }
 
-.section-nav.shrink a {
-  padding: 6px 14px;     /* smaller padding */
-  font-size: 0.8em;      /* smaller font */
+/* shrink effect */
+
+.section-nav.shrink{
+padding:8px 18px;
+box-shadow:0 6px 18px rgba(0,0,0,.6);
 }
 
-.section-nav a {
-  text-decoration: none;
-  background: pink;
-  color: #ff0303;
-  padding: 10px 18px;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 1em;
-  transition: all 0.3s ease;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Scary font for titles */
+/* nav links */
+
+.section-nav a{
+
+flex-shrink:0;                    /* prevent squishing */
+
+text-decoration:none;
+
+background:pink;
+color:#ff0303;
+
+padding:10px 18px;
+
+border-radius:25px;
+
+font-weight:600;
+font-size:.95rem;
+
+white-space:nowrap;
+
+font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;
+
+transition:all .3s ease;
 }
 
-.section-nav a:hover {
-  background: #fff;
-  transform: scale(1.1);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+/* hover desktop */
+
+.section-nav a:hover{
+
+background:white;
+
+transform:scale(1.08);
+
+box-shadow:0 5px 15px rgba(0,0,0,.4);
 }
 
-/* Optional: add some top padding to body so content doesn't hide under nav */
-body {
-  padding-top: 70px; /* adjust based on nav height */
+/* ================= MOBILE ================= */
+
+@media (max-width:768px){
+
+.section-nav{
+
+gap:10px;
+
+padding:12px 12px;
+
+}
+
+.section-nav a{
+
+font-size:.8rem;
+
+padding:8px 14px;
+
+}
+
+}
+
+/* prevent page hiding under nav */
+
+body{
+padding-top:80px;
 }
 
 </style>
+
+
+<script>
+
+/* ===== NAV SHRINK ON SCROLL ===== */
+
+const nav=document.querySelector(".section-nav")
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>60){
+
+nav.classList.add("shrink")
+
+}else{
+
+nav.classList.remove("shrink")
+
+}
+
+})
+
+</script>
+```
+
 
 <script>
 window.addEventListener('scroll', function() {
@@ -906,7 +976,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <section id="about-me">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <style>
 #about-me {
     width: 100%;
@@ -986,32 +1055,105 @@ document.addEventListener("DOMContentLoaded", function() {
     margin-bottom: 20px;
 }
 
-/* Responsive */
-@media(max-width: 768px){
-    .about-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
+/* ================= TABLET ================= */
+@media(max-width:1024px){
 
-    .about-image {
-        margin-bottom: 30px;
-    }
+.about-wrapper{
+gap:40px;
+}
 
-    .about-title {
-        font-size: 32px;
-        text-align: center;
-    }
+.about-image{
+width:220px;
+height:220px;
+flex:0 0 220px;
+}
 
-    .about-subtitle {
-        font-size: 18px;
-        text-align: center;
-    }
+.about-title{
+font-size:36px;
+}
 
-    .about-text {
-        font-size: 16px;
-    }
+.about-subtitle{
+font-size:20px;
+}
+
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+
+.about-wrapper {
+flex-direction: column;
+align-items: center;
+text-align:center;
+}
+
+.about-image {
+margin-bottom: 30px;
+width:200px;
+height:200px;
+}
+
+.about-title {
+font-size: 32px;
+}
+
+.about-subtitle {
+font-size: 18px;
+}
+
+.about-text {
+font-size: 16px;
+}
+
+}
+
+/* ================= SMALL PHONES ================= */
+@media(max-width:480px){
+
+#about-me{
+padding:30px 20px;
+}
+
+.about-image{
+width:170px;
+height:170px;
+}
+
+.about-title{
+font-size:28px;
+}
+
+.about-subtitle{
+font-size:16px;
+}
+
+.about-text{
+font-size:15px;
+line-height:1.7;
+}
+
 }
 </style>
+
+<script>
+// Fade-in effect on scroll
+window.addEventListener('scroll', function(){
+
+    const wrapper = document.querySelector('.about-wrapper');
+
+    const top = wrapper.getBoundingClientRect().top;
+
+    const windowHeight = window.innerHeight;
+
+    if(top < windowHeight - 100){
+
+        wrapper.classList.add('visible');
+
+    }
+
+});
+</script>
+
 
 <div class="about-wrapper">
 
@@ -1085,17 +1227,7 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
 </div>
 
-<script>
-// Fade-in effect on scroll
-window.addEventListener('scroll', function(){
-    const wrapper = document.querySelector('.about-wrapper');
-    const top = wrapper.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    if(top < windowHeight - 100){
-        wrapper.classList.add('visible');
-    }
-});
-</script>
+
 
 </section>
     <!-- Core Identity -->
@@ -1509,105 +1641,154 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
   </div>
 
   <style>
-    /* Section Styling */
-    #hobbies {
-      background:#ffffff;
-      color:#fff;
-      font-family:'Poppins', sans-serif;
-      border-radius:12px;
-      padding:40px 30px;
-      margin-bottom:40px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+/* Section Styling */
+#hobbies {
+  background:#ffffff;
+  color:#fff;
+  font-family:'Poppins', sans-serif;
+  border-radius:12px;
+  padding:40px 30px;
+  margin-bottom:40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
 
-    .section-title {
-      font-size:36px;
-      font-weight:600;
-      color:#ffcc00;
-      text-align:center;
-      margin-bottom:30px;
-    }
+.section-title {
+  font-size:36px;
+  font-weight:600;
+  color:#ffcc00;
+  text-align:center;
+  margin-bottom:30px;
+}
 
-    .hobbies-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-      gap:25px;
-    }
+.hobbies-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:25px;
+}
 
-    .hobby-item {
-      background:#1a1a1a;
-      padding:20px;
-      border-radius:12px;
-      box-shadow:0 5px 10px rgba(0,0,0,0.05);
-      text-align:center;
-      transition:transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.hobby-item {
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 5px 10px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .hobby-item:hover {
-      transform:translateY(-5px);
-      box-shadow:0 10px 20px rgba(0,0,0,0.2);
-    }
+.hobby-item:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
 
-    .hobby-icon {
-      font-size:36px;
-      color:#ffcc00;
-      margin-bottom:10px;
-    }
+.hobby-icon {
+  font-size:36px;
+  color:#ffcc00;
+  margin-bottom:10px;
+}
 
-    .hobby-item h3 {
-      font-size:20px;
-      margin-bottom:10px;
-      color:#fff;
-      font-family:'Times New Roman', Times, serif ;
-    }
+.hobby-item h3 {
+  font-size:20px;
+  margin-bottom:10px;
+  color:#fff;
+  font-family:'Times New Roman', Times, serif;
+}
 
-    .hobby-item p {
-      font-size:15px;
-      color:#d1d1d1;
-      line-height:1.5;
-    }
+.hobby-item p {
+  font-size:15px;
+  color:#d1d1d1;
+  line-height:1.5;
+}
 
-    .section-video {
-      width:100%;
-      margin-top:10px;
-      border-radius:12px;
-    }
+.section-video {
+  width:100%;
+  margin-top:10px;
+  border-radius:12px;
+}
 
-    @media(max-width:768px){
-      #hobbies {
-        padding:30px 6%;
-      }
-      .section-title {
-        font-size:28px;
-      }
-    }
-  </style>
+/* ================= TABLET ================= */
+@media(max-width:1024px){
+  #hobbies{
+    padding:35px 8%;
+  }
+  .section-title{
+    font-size:32px;
+  }
+}
 
-  <script>
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  #hobbies {
+    padding:30px 6%;
+  }
+  .section-title {
+    font-size:28px;
+  }
+  .hobbies-grid {
+    gap:20px;
+  }
+  .hobby-item {
+    padding:18px;
+  }
+  .hobby-item h3 {
+    font-size:18px;
+  }
+  .hobby-item p {
+    font-size:14px;
+  }
+  .hobby-icon {
+    font-size:30px;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+@media(max-width:480px){
+  #hobbies{
+    padding:25px 5%;
+  }
+  .section-title{
+    font-size:24px;
+  }
+  .hobbies-grid{
+    gap:15px;
+  }
+  .hobby-item h3{
+    font-size:16px;
+  }
+  .hobby-item p{
+    font-size:13px;
+  }
+  .hobby-icon{
+    font-size:28px;
+  }
+  .section-video{
+    width:100%;
+  }
+}
+</style>
+
+<script>
 document.addEventListener("DOMContentLoaded", function(){
 
-const map = L.map('travel-map').setView([0, 0], 2);
+  const map = L.map('travel-map').setView([0, 0], 2);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
- attribution: '© OpenStreetMap contributors'
-}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-const destinations = [
- {name: "Nairobi, Kenya", coords: [-1.2921, 36.8219]},
- {name: "Dallas, Embu", coords: [-0.5167, 37.4500]},
- {name: "Tokyo, Japan", coords: [35.6762, 139.6503]}
-];
+  const destinations = [
+   {name: "Nairobi, Kenya", coords: [-1.2921, 36.8219]},
+   {name: "Dallas, Embu", coords: [-0.5167, 37.4500]},
+   {name: "Tokyo, Japan", coords: [35.6762, 139.6503]}
+  ];
 
-destinations.forEach(d => {
- L.marker(d.coords)
-  .addTo(map)
-  .bindPopup(`<b>${d.name}</b>`);
-});
+  destinations.forEach(d => {
+   L.marker(d.coords)
+    .addTo(map)
+    .bindPopup(`<b>${d.name}</b>`);
+  });
 
 });
 </script>
-
-</section>
 
 
 <section id="mission">
@@ -1843,7 +2024,7 @@ input.addEventListener('keypress', (e) => {
 <button id="music-toggle">🎵</button>
 
 <script>
-document.addEventListener("click", function(){
+document.addEventListener("music-toggle", function(){
   const music = document.getElementById("bg-music");
   if(music.paused){
     music.volume = 0.3;
