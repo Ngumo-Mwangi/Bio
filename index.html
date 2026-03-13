@@ -5,15 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portfolio of Ngumo Mwangi - Creative Technologist, Entrepreneur, Artist and Innovator.">
-<meta name="author" content="Ngumo Mwangi">
+  <meta name="author" content="Ngumo Mwangi">
   <title>Ngumo_Mwangi</title>
+  
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<meta name="keywords" content="Ngumo Mwangi, Creative Technologist, Tattoo Artist, Entrepreneur, Fashion Designer, IT Specialist">
-<meta property="og:title" content="Ngumo Mwangi Portfolio">
-<meta property="og:description" content="Creative technologist, entrepreneur and artist portfolio">
-<meta property="og:image" content="assets/profile.jpg">
+
   <!-- Google Fonts -->
   <!-- Fancy Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&display=swap" rel="stylesheet">
@@ -25,39 +26,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-section, .hero-header, #chatbot {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
+    /* ================= GLOBAL ================= */
     html, body {
-      overflow-x: hidden; 
+      overflow-x: hidden;
       margin: 0;
       padding: 0;
       scroll-behavior: smooth;
       background-color: #f4f4f4;
       color: #333;
-      font-family: 'Open Sans', sans-serif; /* default professional font */
+      font-family: 'Open Sans', sans-serif;
+    }
+    section, .hero-header, #chatbot {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    * {
+      transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+      -webkit-transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
-    /* Hero Header */
+    /* ================= HERO HEADER ================= */
     .hero-header {
       position: relative;
       height: 500px;
       width: 95.1%;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-        margin-bottom: 40px;
+      margin-bottom: 40px;
       padding: 25px 30px;
       border-radius: 12px;
-     
-      
-      
+      overflow: hidden;
     }
     .hero-img {
       position: absolute;
@@ -65,10 +67,7 @@ section, .hero-header, #chatbot {
       height: 100%;
       object-fit: cover;
       z-index: 1;
-        margin-bottom: 40px;
-      padding: 25px 30px;
       border-radius: 12px;
-      
     }
     .hero-overlay {
       position: absolute;
@@ -79,433 +78,187 @@ section, .hero-header, #chatbot {
     .hero-content {
       position: relative;
       z-index: 3;
-      text-align: center;
       color: #fff;
     }
     .hero-content h1 {
-      font-family: 'Times New Roman', Times, serif; /* Fancy font for name */
+      font-family: 'Times New Roman', Times, serif;
       font-size: 3.2em;
       text-shadow: 0 6px 20px rgba(0,0,0,0.8);
       letter-spacing: 1.5px;
       padding: 0 20px;
+      opacity: 0;
+      transform: translateY(10px);
     }
     .hero-content h2.typing {
-      font-family: 'Creepster', cursive; /* Scary font for titles */
+      font-family: 'Creepster', cursive;
       font-size: 1.5em;
       margin-top: 10px;
+      opacity: 0;
+      transform: translateY(10px);
     }
-    @media (max-width: 768px) {
-      .hero-header {
-        height: 300px;
-      }
-      .hero-content h1 {
-        font-size: 2.2em;
-      }
+    .hero-content.visible h1, .hero-content.visible h2.typing {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Header */
+    /* ================= HEADER ================= */
     header {
       background-color: #2c3e50;
       color: #fff;
       padding: 40px 20px;
       text-align: center;
       font-family: 'Playfair Display', serif;
+      margin-top:60px;
     }
     header h1 {
       margin: 0;
       font-size: 3em;
       letter-spacing: 1px;
-      font-family: 'Lobster', cursive; /* Fancy */
+      font-family: 'Lobster', cursive;
     }
     header p {
       margin: 5px 0;
       font-size: 1.2em;
-      font-family: 'Roboto', sans-serif; /* Professional */
+      font-family: 'Roboto', sans-serif;
     }
 
-
-.section-video {
-  width: 100%;
-  max-width: 150px;   /* smaller width */
-  height:150px ;
-  border-radius: 8px; /* slightly smaller corners */
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  object-fit: cover;
-  display: block;
-  margin: 5px auto;  /* smaller vertical spacing */
-  text-align: left;
-}
-    /* Section styles */
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
-    section {
-      margin-bottom: 40px;
-      background-color: #fff;
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.08);
-    }
-    
-    section h2 {
-      color: #2c3e50;
-      border-bottom: 3px solid #3498db;
-      padding-bottom: 6px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      font-family: 'Lobster', cursive; /* Fancy for section headings */
-      font-size: 2em;
-      letter-spacing: 0.5px;
-    }
-    section h2 i {
-      margin-right: 10px;
-      color: pink;
-    }
-    h3 {
-      color: rgb(236, 0, 39);
-      margin-top: 15px;
-      font-family: 'Creepster', cursive; /* Scary for subheadings */
-      font-size: larger;
-    }
-    p, li {
-      font-family: 'Roboto', sans-serif; /* Professional for body */
-      line-height: 1.6;
-    }
-    ul {
-      padding-left: 20px;
-    }
-
-    /* Skills */
-    .skills span {
-      display: inline-block;
-      background: pink;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 5px;
-      margin: 3px 3px 3px 0;
-      font-size: 0.9em;
-      font-family: 'Lobster', cursive; /* Fancy */
-    }
-
-    /* Social links */
-    .social-links a {
-      margin-right: 15px;
-      text-decoration: none;
-      color: pink;
-      font-weight: bold;
-      transition: color 0.3s, transform 0.3s;
-      font-family: 'Roboto', sans-serif; /* professional */
-    }
-
-    /* Floating social sidebar */
-    .floating-social a {
-      width: 52px;
-      height: 52px;
-      font-size: 22px;
-    }
-
-    /* Scroll Progress */
-    .scroll-progress {
-      position: fixed;
+    /* ================= NAVIGATION ================= */
+    .section-nav{
+      display:flex;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      align-items:center;
+      gap:12px;
+      padding:14px 20px;
+      background:#111;
+      position:fixed;
       top:0;
       left:0;
-      height:6px;
-      width:0%;
-      background:pink;
+      width:100%;
       z-index:9999;
-      transition: width 0.2s ease;
+      box-shadow:0 3px 10px rgba(0,0,0,0.4);
+      overflow-x:auto;
+      scrollbar-width:none;
+      transition:all .35s cubic-bezier(.19,1,.22,1);
+    }
+    .section-nav::-webkit-scrollbar{display:none;}
+    .section-nav.shrink{padding:8px 18px; box-shadow:0 6px 18px rgba(0,0,0,.6);}
+    .section-nav a{
+      flex-shrink:0;
+      text-decoration:none;
+      background:pink;
+      color:#ff0303;
+      padding:10px 18px;
+      border-radius:25px;
+      font-weight:600;
+      font-size:.95rem;
+      white-space:nowrap;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;
+      transition:all .3s ease;
+    }
+    .section-nav a:hover{
+      background:white;
+      transform:scale(1.08);
+      box-shadow:0 5px 15px rgba(0,0,0,.4);
     }
 
-    /* Footer */
-    footer, .footer-content {
-      font-family: 'Open Sans', sans-serif; /* Professional */
+    /* ================= FLOATING SOCIAL ================= */
+    .floating-social{
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) translateX(-80px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 9999;
     }
-
-    footer h2 {
-      font-family: 'Lobster', cursive; /* Fancy */
+    .floating-social.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(-50%) translateX(12px);
     }
-
-    /* Contact Form */
-    .contact-form-section {
-      font-family: 'Roboto', sans-serif; /* Professional */
+    .floating-social a{
+      width: 52px;
+      height: 52px;
+      background:#222;
+      color:#fff;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-size:22px;
+      transition:transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     }
+    .floating-social a:hover{transform:scale(1.25) rotate(3deg); box-shadow:0 8px 20px rgba(0,0,0,0.35);}
+    .floating-social a.linkedin:hover { background: #0a66c2; }
+    .floating-social a.instagram:hover { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af); }
+    .floating-social a.twitter:hover { background: #1da1f2; }
+    .floating-social a.github:hover { background: #333; box-shadow:0 0 12px #fff; }
+    .floating-social a.facebook:hover { background: #1877f2; }
+    .floating-social a.tiktok:hover { background: #000; box-shadow:0 0 10px #69C9D0; }
+    .floating-social a.youtube:hover { background: #FF0000; }
+    .floating-social a.snapchat:hover { background:#FFFC00; color:#000; }
+    .floating-social a.telegram:hover { background:#229ED9; }
+    .floating-social a.pinterest:hover { background:#FF0000; }
 
-    /* Media Queries */
-    @media (max-width: 768px) {
-      section h2 { font-size: 1.5em; }
-      .skills span { font-size: 0.8em; }
+    /* ================= SECTIONS ================= */
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:20px;
     }
+    section{
+      margin-bottom:40px;
+      background-color:#fff;
+      padding:25px 30px;
+      border-radius:12px;
+      box-shadow:0 5px 10px rgba(0,0,0,0.08);
+    }
+    section h2{
+      color:#2c3e50;
+      border-bottom:3px solid #3498db;
+      padding-bottom:6px;
+      margin-bottom:15px;
+      display:flex;
+      align-items:center;
+      font-family:'Lobster', cursive;
+      font-size:2em;
+      letter-spacing:0.5px;
+    }
+    section h2 i{margin-right:10px; color:pink;}
+    h3{color:rgb(236,0,39); margin-top:15px; font-family:'Creepster', cursive; font-size:larger;}
+    p,li{font-family:'Roboto', sans-serif; line-height:1.6;}
+    ul{padding-left:20px;}
+    .skills span{display:inline-block; background:pink; color:#fff; padding:5px 10px; border-radius:5px; margin:3px; font-size:0.9em; font-family:'Lobster', cursive;}
+    .section-video{width:100%; max-width:150px; height:150px; border-radius:8px; box-shadow:0 3px 8px rgba(0,0,0,0.3); object-fit:cover; display:block; margin:5px auto; text-align:left;}
 
-    @media (max-width:768px){
+    /* ================= SCROLL PROGRESS ================= */
+    .scroll-progress{position:fixed; top:0; left:0; height:6px; width:0%; background:pink; z-index:9999; transition:width 0.2s ease;}
 
-.section-nav{
-flex-direction:column;
-align-items:center;
-gap:8px;
-padding:10px;
-}
-
-.section-nav a{
-font-size:0.9em;
-padding:8px 14px;
-}
-
-body{
-padding-top:140px;
-}
-
-}
-
+    /* ================= MEDIA QUERIES ================= */
+    @media(max-width:1024px){.hero-header{height:400px;}.hero-content h1{font-size:2.6em;}.hero-content h2.typing{font-size:1.3em;} section h2{font-size:1.8em;}}
+    @media(max-width:768px){
+      .hero-header{height:300px;padding:20px;}
+      .hero-content h1{font-size:2.2em;}
+      .hero-content h2.typing{font-size:1.1em;}
+      section h2{font-size:1.5em;}
+      .skills span{font-size:0.8em;}
+      .section-nav{flex-direction:column; align-items:center; gap:8px; padding:10px;}
+      .section-nav a{font-size:0.9em; padding:8px 14px;}
+      body{padding-top:140px;}
+    }
+    @media(max-width:600px){.hero-header{height:250px;}.hero-content h1{font-size:1.8em;}.hero-content h2.typing{font-size:1.1em;}.floating-social{display:none;}}
+    @media(max-width:500px){.section-video{max-width:120px; height:120px;}}
   </style>
-
 </head>
 <body>
 
-    <!-- Floating Cloud Watermark -->
-<div class="watermark" id="watermark"></div>
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  overflow-x: hidden;
-  position: relative;
-  background: #fff; /* your base background */
-}
-
-.watermark {
-  position: fixed;   /* cover the entire viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* clicks pass through */
-  z-index: 0; 
-             /* lowest layer */
-}
-
-.watermark span {
-  position: absolute;
-  color: rgb(245, 12, 12); /* subtle background effect */
-  font-size: 48px;
-  font-weight: lighter;
-  white-space: nowrap;
-  user-select: none;
-  align-items:flex-end;
-  transform-origin: end to end;
-  font-family: 'Creepster', cursive; /* Scary font for titles */
-}
-
-/* Responsive font adjustments */
-@media (max-width: 900px) {
-  .watermark span { font-size: 50px; }
-}
-@media (max-width: 500px) {
-  .watermark span { font-size: 30px; }
-}
-
-/* Main content always above watermark */
-.main-content {
-  position: relative;
-  z-index: 1; 
-}
-@media (max-width:600px){
-
-.hero-header{
-height:250px;
-width:100%;
-padding:10px;
-}
-
-.hero-content h1{
-font-size:1.8em;
-}
-
-.hero-content h2{
-font-size:1.1em;
-}
-
-}@media (max-width:700px){
-
-.floating-social{
-display:none;
-}
-
-}
-@media (max-width:600px){
-
-#chatbot{
-width:90%;
-right:5%;
-bottom:70px;
-}
-
-#chatbot-toggle{
-right:15px;
-bottom:15px;
-}
-
-#music-toggle{
-bottom:120px;
-}
-
-}#travel-map{
-width:100%;
-height:300px;
-border-radius:12px;
-margin-top:10px;
-}
-@media (max-width:500px){
-
-.hobbies-grid{
-grid-template-columns:1fr;
-}
-
-}header{
-margin-top:60px;
-}/* Smooth transitions for all sections, buttons, images, and cards */
-* {
-  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-}/* Initial hidden state */
-.fade-section {
-  opacity: 0;
-  transform: translateY(20px);
-  will-change: opacity, transform;
-}
-
-/* Visible state */
-.fade-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-</style>
-
-<script>
-const watermarkContainer = document.getElementById('watermark');
-const text = "EST 2002 April 29th";
-const count = 10;
-const watermarks = [];
-
-for (let i = 0; i < count; i++) {
-  const span = document.createElement('span');
-  span.textContent = text;
-
-  // center starting point
-  let cx = Math.random() * window.innerWidth;
-  let cy = Math.random() * window.innerHeight;
-
-  // spiral motion parameters
-  let radiusX = 50 + Math.random() * 150;
-  let radiusY = 50 + Math.random() * 150;
-  let angle = Math.random() * 2 * Math.PI;
-  let speed = 0.001 + Math.random() * 0.002; // radial speed
-
-  // rotation & scaling
-  let rotation = Math.random() * 360;
-  let rotationSpeed = (Math.random() * 0.3 + 0.1) * (Math.random() < 0.5 ? 1 : -1);
-  let scale = 0.8 + Math.random() * 0.7;
-  let scaleSpeed = 0.001 + Math.random() * 0.002;
-  
-  // opacity
-  let opacity = 0.05 + Math.random() * 0.05;
-  let opacitySpeed = 0.0005 + Math.random() * 0.001;
-
-  span.style.left = cx + "px";
-  span.style.top = cy + "px";
-  span.style.transform = `rotate(${rotation}deg) scale(${scale})`;
-  span.style.opacity = opacity;
-
-  watermarkContainer.appendChild(span);
-
-  watermarks.push({span, cx, cy, radiusX, radiusY, angle, speed, rotation, rotationSpeed, scale, scaleSpeed, opacity, opacitySpeed});
-}
-
-function animateWatermarks() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  watermarks.forEach(w => {
-    // spiral movement
-    w.angle += w.speed * 2 * Math.PI;
-    w.cx += Math.sin(w.angle) * 0.5;
-    w.cy += Math.cos(w.angle) * 0.5;
-
-    // wrap around edges
-    if (w.cx > width + 100) w.cx = -100;
-    if (w.cx < -100) w.cx = width + 100;
-    if (w.cy > height + 100) w.cy = -100;
-    if (w.cy < -100) w.cy = height + 100;
-
-    // rotation & scale
-    w.rotation += w.rotationSpeed;
-    w.scale += w.scaleSpeed;
-    if (w.scale > 1.5 || w.scale < 0.8) w.scaleSpeed *= -1;
-
-    // opacity oscillation
-    w.opacity += w.opacitySpeed;
-    if (w.opacity > 0.1 || w.opacity < 0.03) w.opacitySpeed *= -1;
-
-    // apply styles
-    w.span.style.left = w.cx + "px";
-    w.span.style.top = w.cy + "px";
-    w.span.style.transform = `rotate(${w.rotation}deg) scale(${w.scale})`;
-    w.span.style.opacity = w.opacity;
-  });
-
-  requestAnimationFrame(animateWatermarks);
-}
-
-animateWatermarks();
-
-window.addEventListener('resize', () => {
-  watermarks.forEach(w => {
-    w.cx = Math.random() * window.innerWidth;
-    w.cy = Math.random() * window.innerHeight;
-  });
-});
-</script>
-
-
-<header class="hero-header" id="home">
-  <img src="assets/profile.jpg" alt="Wilfred Ngumo portrait" class="hero-img">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-   <h1>Ngumo Mwangi</h1>
-   <h2 class="typing"></h2>
-   <p class="footer-slogan">If You’re Not Loud, You’re Not Allowed.</p>
-  
-   
-   <script>
-     const textArray = ["Creative Technologist","Digital Problem Solver","Future Innovator","Business man","Enterprenuer","artist"];
-     let typingElement = document.querySelector(".typing");
-     let textIndex = 0; let charIndex = 0;
-     function typeEffect() {
-       if(charIndex < textArray[textIndex].length){
-         typingElement.textContent += textArray[textIndex].charAt(charIndex);
-         charIndex++;
-         setTimeout(typeEffect, 80);
-       } else { setTimeout(eraseEffect, 2000); }
-     }
-     function eraseEffect(){
-       if(charIndex > 0){
-         typingElement.textContent = textArray[textIndex].substring(0,charIndex-1);
-         charIndex--;
-         setTimeout(eraseEffect, 50);
-       } else {
-         textIndex = (textIndex + 1) % textArray.length;
-         setTimeout(typeEffect, 500);
-       }
-     }
-     document.addEventListener("DOMContentLoaded", function(){ setTimeout(typeEffect, 1000); });
-   </script>
-  </div>
-</header>
-
+<!-- NAVIGATION -->
 <div class="section-nav">
   <a href="#home">Home</a>
   <a href="#core-identity">Core Identity</a>
@@ -519,176 +272,7 @@ window.addEventListener('resize', () => {
   <a href="#footer">CONTACT ME</a>
 </div>
 
-
-<style>
-
-/* ================= NAVIGATION ================= */
-
-.section-nav{
-display:flex;
-flex-wrap:nowrap;                 /* keep items in one line */
-justify-content:flex-start;
-align-items:center;
-gap:12px;
-
-padding:14px 20px;
-background:#111;
-
-position:fixed;
-top:0;
-left:0;
-width:100%;
-
-z-index:9999;
-box-shadow:0 3px 10px rgba(0,0,0,0.4);
-
-overflow-x:auto;                  /* scroll if small screen */
-scrollbar-width:none;
-
-transition:all .35s cubic-bezier(.19,1,.22,1);
-}
-
-/* hide scrollbar */
-.section-nav::-webkit-scrollbar{
-display:none;
-}
-
-/* shrink effect */
-
-.section-nav.shrink{
-padding:8px 18px;
-box-shadow:0 6px 18px rgba(0,0,0,.6);
-}
-
-/* nav links */
-
-.section-nav a{
-
-flex-shrink:0;                    /* prevent squishing */
-
-text-decoration:none;
-
-background:pink;
-color:#ff0303;
-
-padding:10px 18px;
-
-border-radius:25px;
-
-font-weight:600;
-font-size:.95rem;
-
-white-space:nowrap;
-
-font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto;
-
-transition:all .3s ease;
-}
-
-/* hover desktop */
-
-.section-nav a:hover{
-
-background:white;
-
-transform:scale(1.08);
-
-box-shadow:0 5px 15px rgba(0,0,0,.4);
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width:768px){
-
-.section-nav{
-
-gap:10px;
-
-padding:12px 12px;
-
-}
-
-.section-nav a{
-
-font-size:.8rem;
-
-padding:8px 14px;
-
-}
-
-}
-
-/* prevent page hiding under nav */
-
-body{
-padding-top:80px;
-}
-
-</style>
-
-
-<script>
-
-/* ===== NAV SHRINK ON SCROLL ===== */
-
-const nav=document.querySelector(".section-nav")
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY>60){
-
-nav.classList.add("shrink")
-
-}else{
-
-nav.classList.remove("shrink")
-
-}
-
-})
-
-</script>
-```
-
-
-<script>
-window.addEventListener('scroll', function() {
-  const nav = document.querySelector('.section-nav');
-  if(window.scrollY > 50){   // trigger after scrolling 50px
-    nav.classList.add('shrink');
-  } else {
-    nav.classList.remove('shrink');
-  }
-});
-</script>
-
-
-
-
-<div class="scroll-progress"></div>
-<style>
-  .scroll-progress{
-position:fixed;
-top:0;
-left:0;
-height:6px;
-width:0%;
-background:pink;
-z-index:9999;
-transition:width 0.2s ease;
-}
-</style>
-<script>
-
-window.onscroll = function() {
-  let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let scrolled = (winScroll / height) * 100;
-  document.querySelector(".scroll-progress").style.width = scrolled + "%";
-};
-</script>
-
-<!-- Floating Social Media Sidebar -->
+<!-- FLOATING SOCIAL -->
 <div class="floating-social">
   <a href="https://www.linkedin.com/in/ngumo-mwangi/" class="linkedin"><i class="fab fa-linkedin"></i></a>
   <a href="https://www.instagram.com/Ngumo_Mwangi" class="instagram"><i class="fab fa-instagram"></i></a>
@@ -702,272 +286,74 @@ window.onscroll = function() {
   <a href="https://www.pinterest.com/Ngumo_Mwangi" class="pinterest"><i class="fab fa-pinterest"></i></a>
 </div>
 
-<style>
-/* Floating sidebar base */
-.floating-social {
-  position: fixed;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%) translateX(-20px);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 9999;
-}
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"></div>
 
-/* Show animation */
-.floating-social.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) translateX(0);
-}
-
-.floating-social a {
-  width: 52px;
-  height: 52px;
-  background: #222;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-size: 22px;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Platform colors on hover */
-.floating-social a.linkedin:hover { background: #0a66c2; }
-.floating-social a.instagram:hover { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af); }
-.floating-social a.twitter:hover { background: #1da1f2; }
-.floating-social a.github:hover { background: #333; box-shadow: 0 0 12px #fff; }
-.floating-social a.facebook:hover { background: #1877f2; }
-.floating-social a.tiktok:hover { background: #000; box-shadow: 0 0 10px #69C9D0; }
-.floating-social a.youtube:hover { background: #FF0000; }
-.floating-social a.snapchat:hover { background: #FFFC00; color:#000; }
-.floating-social a.telegram:hover { background: #229ED9; }
-.floating-social a.pinterest:hover  { background: #FF0000; }
-
-/* Hover motion */
-.floating-social a:hover {
-  transform: scale(1.25) rotate(3deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-</style>
-<style>
-/* Floating sidebar base */
-.floating-social {
-  position: fixed;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%) translateX(-20px);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 9999;
-}
-
-/* Show animation */
-.floating-social.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) translateX(0);
-}
-
-/* Icon styles */
-.floating-social a {
-  width: 52px;
-  height: 52px;
-  background: #222;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-size: 22px;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Platform colors on hover */
-.floating-social a.linkedin:hover { background: #0a66c2; }
-.floating-social a.instagram:hover { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af); }
-.floating-social a.twitter:hover { background: #1da1f2; }
-.floating-social a.github:hover { background: #333; box-shadow: 0 0 12px #fff; }
-.floating-social a.facebook:hover { background: #1877f2; }
-.floating-social a.tiktok:hover { background: #000; box-shadow: 0 0 10px #69C9D0; }
-.floating-social a.youtube:hover { background: #FF0000; }
-.floating-social a.snapchat:hover { background: #FFFC00; color:#000; }
-.floating-social a.telegram:hover { background: #229ED9; }
-.floating-social a.pinterest:hover  { background: #FF0000; }
-
-/* Hover motion */
-.floating-social a:hover {
-  transform: scale(1.25) rotate(3deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-
-/* Responsive Adjustments */
-
-/* Tablets (medium screens) */
-@media (max-width: 900px) {
-  .floating-social a {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-}
-
-/* Mobile (small screens) */
-@media (max-width: 600px) {
-  .floating-social {
-    display: none; /* hide completely on mobile */
-  }
-}
-
-/* Floating sidebar base */
-.floating-social {
-  position: fixed;
-  top: 50%;
-  left: 0; /* start hidden off-screen */
-  transform: translateY(-50%) translateX(-80px); /* off-screen */
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 9999;
-}
-
-/* Show animation */
-.floating-social.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-50%) translateX(12px); /* slide into view */
-}
-
-/* Icon styles */
-.floating-social a {
-  width: 52px;
-  height: 52px;
-  background: #222;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-size: 22px;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Platform hover colors */
-.floating-social a.linkedin:hover { background: #0a66c2; }
-.floating-social a.instagram:hover { background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af); }
-.floating-social a.twitter:hover { background: #1da1f2; }
-.floating-social a.github:hover { background: #333; box-shadow: 0 0 12px #fff; }
-.floating-social a.facebook:hover { background: #1877f2; }
-.floating-social a.tiktok:hover { background: #000; box-shadow: 0 0 10px #69C9D0; }
-.floating-social a.youtube:hover { background: #FF0000; }
-.floating-social a.snapchat:hover { background: #FFFC00; color:#000; }
-.floating-social a.telegram:hover { background: #229ED9; }
-.floating-social a.pinterest:hover  { background: #FF0000; }
-
-/* Hover motion */
-.floating-social a:hover {
-  transform: scale(1.25) rotate(3deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
-
-/* Responsive adjustments */
-/* Tablets */
-@media (max-width: 900px) {
-  .floating-social a {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .floating-social {
-    display: none; /* hide completely */
-  }
-}
-/* Buttons & Nav */
-.section-nav a, .floating-social a, .project-card, .skills span {
-  transition: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-
-.section-nav a:hover, .floating-social a:hover, .project-card:hover, .skills span:hover {
-  transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}.hero-content h1, .hero-content h2.typing {
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.hero-content.visible h1, .hero-content.visible h2.typing {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+<!-- HERO HEADER -->
+<header class="hero-header" id="home">
+  <img src="assets/profile.jpg" class="hero-img">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Ngumo Mwangi</h1>
+    <h2 class="typing"></h2>
+    <p class="footer-slogan">If You’re Not Loud, You’re Not Allowed.</p>
+  </div>
+</header>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-
-  const floatingSocial = document.querySelector('.floating-social');
-  const container = document.querySelector('.container');
-  const header = document.querySelector('header');
-  const footer = document.querySelector('footer');
-
-  const icons = document.querySelectorAll('.floating-social a');
-
-  function toggleFloatingSocial() {
-
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-
-    const containerTop = container.offsetTop;
-    const footerTop = footer.offsetTop;
-
-    if(scrollTop + windowHeight/2 > containerTop && scrollTop + windowHeight/2 < footerTop){
-
-      floatingSocial.classList.add('show');
-
-    } else {
-
-      floatingSocial.classList.remove('show');
-
-    }
-
-    icons.forEach((icon, index) => {
-
-      const rotateAmount = Math.sin((scrollTop / 50) + index) * 5;
-
-      icon.style.transform =
-        `rotate(${rotateAmount}deg) scale(${floatingSocial.classList.contains('show') ? 1 : 0.8})`;
-
-    });
-
+  // Hero typing effect
+  const textArray = ["Creative Technologist","Digital Problem Solver","Future Innovator","Business man","Enterprenuer","Artist"];
+  let typingElement = document.querySelector(".typing");
+  let textIndex = 0; let charIndex = 0;
+  function typeEffect(){
+    if(charIndex<textArray[textIndex].length){
+      typingElement.textContent+=textArray[textIndex].charAt(charIndex);
+      charIndex++; setTimeout(typeEffect,80);
+    } else setTimeout(eraseEffect,2000);
   }
+  function eraseEffect(){
+    if(charIndex>0){
+      typingElement.textContent=textArray[textIndex].substring(0,charIndex-1);
+      charIndex--; setTimeout(eraseEffect,50);
+    } else {
+      textIndex=(textIndex+1)%textArray.length;
+      setTimeout(typeEffect,500);
+    }
+  }
+  document.addEventListener("DOMContentLoaded",()=>{setTimeout(typeEffect,1000);});
+  
+  // Scroll progress
+  window.onscroll=function(){
+    let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
+    let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    let scrolled=(winScroll/height)*100;
+    document.querySelector(".scroll-progress").style.width=scrolled+"%";
+  };
 
-  window.addEventListener('scroll', toggleFloatingSocial);
-  window.addEventListener('resize', toggleFloatingSocial);
+  // Nav shrink on scroll
+  const nav=document.querySelector(".section-nav");
+  window.addEventListener("scroll",()=>{if(window.scrollY>60){nav.classList.add("shrink");}else{nav.classList.remove("shrink");}});
 
+  // Floating social toggle
+  const floatingSocial=document.querySelector('.floating-social');
+  function toggleFloatingSocial(){
+    const scrollTop=window.scrollY;
+    const windowHeight=window.innerHeight;
+    const container=document.querySelector('.container');
+    const footer=document.querySelector('footer');
+    if(container && footer){
+      const containerTop=container.offsetTop;
+      const footerTop=footer.offsetTop;
+      if(scrollTop+windowHeight/2>containerTop && scrollTop+windowHeight/2<footerTop){
+        floatingSocial.classList.add('show');
+      } else {floatingSocial.classList.remove('show');}
+    }
+  }
+  window.addEventListener('scroll',toggleFloatingSocial);
+  window.addEventListener('resize',toggleFloatingSocial);
   toggleFloatingSocial();
-
-});
 </script>
+
 
 
 
@@ -976,183 +362,117 @@ document.addEventListener("DOMContentLoaded", function() {
 <section id="about-me">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-#about-me {
-    width: 100%;
-    background: #111;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 12px;
-    margin-bottom: 40px;
-    padding: 40px 30px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+    <style>
+      #about-me {
+          width: 100%;
+          background: #111;
+          color: #fff;
+          font-family: 'Poppins', sans-serif;
+          border-radius: 12px;
+          margin-bottom: 40px;
+          padding: 40px 30px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
 
-.about-wrapper {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    align-items: flex-start;
-    gap: 50px;
-    flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease-out;
-}
+      .about-wrapper {
+          max-width: 1100px;
+          margin: auto;
+          display: flex;
+          align-items: flex-start;
+          gap: 50px;
+          flex-wrap: wrap;
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 1s ease-out;
+      }
 
-.about-wrapper.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+      .about-wrapper.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
 
-/* Left column: image */
-.about-image {
-    flex: 0 0 250px;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 4px solid #ffcc00;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+      .about-image {
+          flex: 0 0 250px;
+          width: 250px;
+          height: 250px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 4px solid #ffcc00;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-.about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+      .about-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+      }
 
-.about-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
+      .about-image:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      }
 
-/* Right column: text */
-.about-text {
-    flex: 1;
-    font-size: 17px;
-    line-height: 1.8;
-    color: #d1d1d1;
-}
+      .about-text {
+          flex: 1;
+          font-size: 17px;
+          line-height: 1.8;
+          color: #d1d1d1;
+      }
 
-.about-title {
-    font-size: 42px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #ffcc00;
-}
+      .about-title {
+          font-size: 42px;
+          font-weight: 600;
+          margin-bottom: 15px;
+          color: #ffcc00;
+      }
 
-.about-subtitle {
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 25px;
-    color: #fff;
-}
+      .about-subtitle {
+          font-size: 22px;
+          font-weight: 400;
+          margin-bottom: 25px;
+          color: #fff;
+      }
 
-.about-text p {
-    margin-bottom: 20px;
-}
+      .about-text p {
+          margin-bottom: 20px;
+      }
 
-/* ================= TABLET ================= */
-@media(max-width:1024px){
+      @media(max-width:1024px){
+        .about-wrapper{ gap:40px; }
+        .about-image{ width:220px; height:220px; flex:0 0 220px; }
+        .about-title{ font-size:36px; }
+        .about-subtitle{ font-size:20px; }
+      }
 
-.about-wrapper{
-gap:40px;
-}
+      @media(max-width:768px){
+        .about-wrapper { flex-direction: column; align-items: center; text-align:center; }
+        .about-image { margin-bottom: 30px; width:200px; height:200px; }
+        .about-title { font-size: 32px; }
+        .about-subtitle { font-size: 18px; }
+        .about-text { font-size: 16px; }
+      }
 
-.about-image{
-width:220px;
-height:220px;
-flex:0 0 220px;
-}
+      @media(max-width:480px){
+        #about-me{ padding:30px 20px; }
+        .about-image{ width:170px; height:170px; }
+        .about-title{ font-size:28px; }
+        .about-subtitle{ font-size:16px; }
+        .about-text{ font-size:15px; line-height:1.7; }
+      }
+    </style>
 
-.about-title{
-font-size:36px;
-}
-
-.about-subtitle{
-font-size:20px;
-}
-
-}
-
-/* ================= MOBILE ================= */
-@media(max-width:768px){
-
-.about-wrapper {
-flex-direction: column;
-align-items: center;
-text-align:center;
-}
-
-.about-image {
-margin-bottom: 30px;
-width:200px;
-height:200px;
-}
-
-.about-title {
-font-size: 32px;
-}
-
-.about-subtitle {
-font-size: 18px;
-}
-
-.about-text {
-font-size: 16px;
-}
-
-}
-
-/* ================= SMALL PHONES ================= */
-@media(max-width:480px){
-
-#about-me{
-padding:30px 20px;
-}
-
-.about-image{
-width:170px;
-height:170px;
-}
-
-.about-title{
-font-size:28px;
-}
-
-.about-subtitle{
-font-size:16px;
-}
-
-.about-text{
-font-size:15px;
-line-height:1.7;
-}
-
-}
-</style>
-
-<script>
-// Fade-in effect on scroll
-window.addEventListener('scroll', function(){
-
-    const wrapper = document.querySelector('.about-wrapper');
-
-    const top = wrapper.getBoundingClientRect().top;
-
-    const windowHeight = window.innerHeight;
-
-    if(top < windowHeight - 100){
-
-        wrapper.classList.add('visible');
-
-    }
-
-});
-</script>
+    <script>
+      window.addEventListener('scroll', function(){
+          const wrapper = document.querySelector('.about-wrapper');
+          const top = wrapper.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          if(top < windowHeight - 100){
+              wrapper.classList.add('visible');
+          }
+      });
+    </script>
 
 
 <div class="about-wrapper">
@@ -1486,6 +806,8 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
         <li>Expand mentorship and community engagement</li>
         <li>Build strong professional & creative networks</li>
       </ul>
+
+
       <h4>Long-Term (5–10 years)</h4>
       <ul>
         <li>Expand mentorship and community engagement</li>
@@ -1494,6 +816,45 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
         <li>Become a role model for youth and emerging creatives</li>
         <li>Continuous personal, spiritual, and professional growth</li>
       </ul>
+
+      <h2>Mission</h2>
+
+<blockquote>
+“I am the way, the truth, and the life.”  
+<br>— John 14:6
+</blockquote>
+
+<p>
+My work is guided by faith, purpose and service. 
+Through creativity, technology and entrepreneurship, 
+I aim to inspire and uplift communities.
+</p>
+<h2>My Journey</h2>
+
+<ul class="timeline">
+
+<li>
+<span>2002</span>
+<p>Born in Embu, Kenya</p>
+</li>
+
+<li>
+<span>2010–2016</span>
+<p>Primary School – St Michael</p>
+</li>
+
+<li>
+<span>2017–2020</span>
+<p>High School – Embu Urban Integrated</p>
+</li>
+
+<li>
+<span>2021–Present</span>
+<p>University – JKUAT</p>
+</li>
+
+</ul>
+      
     </section>
 
  <!-- Hobbies & Interests -->
@@ -1791,47 +1152,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 
 
-<section id="mission">
-<h2><i class="fas fa-cross"></i>Mission</h2>
 
-<blockquote>
-“I am the way, the truth, and the life.”  
-<br>— John 14:6
-</blockquote>
-
-<p>
-My work is guided by faith, purpose and service. 
-Through creativity, technology and entrepreneurship, 
-I aim to inspire and uplift communities.
-</p>
-<section id="journey">
-<h2><i class="fas fa-route"></i>My Journey</h2>
-
-<ul class="timeline">
-
-<li>
-<span>2002</span>
-<p>Born in Embu, Kenya</p>
-</li>
-
-<li>
-<span>2010–2016</span>
-<p>Primary School – St Michael</p>
-</li>
-
-<li>
-<span>2017–2020</span>
-<p>High School – Embu Urban Integrated</p>
-</li>
-
-<li>
-<span>2021–Present</span>
-<p>University – JKUAT</p>
-</li>
-
-</ul>
-
-</section>
 </section>
 
 
