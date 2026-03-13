@@ -1079,27 +1079,29 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
   </script>
   <script>
 document.addEventListener("DOMContentLoaded", function() {
-
   const videos = document.querySelectorAll("video[data-src]");
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  // Keep track of scroll direction
-  let lastScroll = window.scrollY;
-
-  // IntersectionObserver for lazy loading & visibility
+  // Lazy-load & IntersectionObserver
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const video = entry.target;
 
+      // Lazy-load video
       if(video.dataset.src && !video.src){
         video.src = video.dataset.src;
       }
 
       // Fade effect
       video.style.transition = "opacity 0.6s ease";
-
       if(entry.isIntersecting){
         video.style.opacity = 1;
+
+        // Autoplay if desktop
+        if(!isMobile){
+          video.play().catch(()=>{});
+        }
+
       } else {
         video.style.opacity = 0.2;
         video.pause();
@@ -1107,10 +1109,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }, { threshold: 0.5 });
 
+  // Initialize all videos
   videos.forEach(video => {
     video.style.opacity = 0.2;
     observer.observe(video);
 
+    // Click-to-play for mobile
     if(isMobile){
       video.addEventListener("click", () => {
         if(video.paused) video.play();
@@ -1118,41 +1122,9 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   });
-
-  // Smart auto-play/pause based on scroll direction
-  function smartPlayPause() {
-    const scrollY = window.scrollY;
-    const directionDown = scrollY > lastScroll;
-    lastScroll = scrollY;
-
-    let maxVisible = 0;
-    let videoToPlay = null;
-
-    videos.forEach(video => {
-      const rect = video.getBoundingClientRect();
-      const visible = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-      
-      if(visible > maxVisible){
-        maxVisible = visible;
-        videoToPlay = video;
-      }
-    });
-
-    videos.forEach(video => {
-      if(video === videoToPlay){
-        if(!isMobile) video.play().catch(()=>{});
-      } else {
-        video.pause();
-      }
-    });
-  }
-
-  window.addEventListener("scroll", smartPlayPause);
-  window.addEventListener("resize", smartPlayPause);
-  smartPlayPause(); // initial check
-
 });
 </script>
+
 
 </section>
 
@@ -1968,82 +1940,7 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
 
-  const videos = document.querySelectorAll("video[data-src]");
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  // Keep track of scroll direction
-  let lastScroll = window.scrollY;
-
-  // IntersectionObserver for lazy loading & visibility
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const video = entry.target;
-
-      if(video.dataset.src && !video.src){
-        video.src = video.dataset.src;
-      }
-
-      // Fade effect
-      video.style.transition = "opacity 0.6s ease";
-
-      if(entry.isIntersecting){
-        video.style.opacity = 1;
-      } else {
-        video.style.opacity = 0.2;
-        video.pause();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  videos.forEach(video => {
-    video.style.opacity = 0.2;
-    observer.observe(video);
-
-    if(isMobile){
-      video.addEventListener("click", () => {
-        if(video.paused) video.play();
-        else video.pause();
-      });
-    }
-  });
-
-  // Smart auto-play/pause based on scroll direction
-  function smartPlayPause() {
-    const scrollY = window.scrollY;
-    const directionDown = scrollY > lastScroll;
-    lastScroll = scrollY;
-
-    let maxVisible = 0;
-    let videoToPlay = null;
-
-    videos.forEach(video => {
-      const rect = video.getBoundingClientRect();
-      const visible = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-      
-      if(visible > maxVisible){
-        maxVisible = visible;
-        videoToPlay = video;
-      }
-    });
-
-    videos.forEach(video => {
-      if(video === videoToPlay){
-        if(!isMobile) video.play().catch(()=>{});
-      } else {
-        video.pause();
-      }
-    });
-  }
-
-  window.addEventListener("scroll", smartPlayPause);
-  window.addEventListener("resize", smartPlayPause);
-  smartPlayPause(); // initial check
-
-});
-</script>
 
 
 
