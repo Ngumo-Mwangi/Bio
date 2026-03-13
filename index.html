@@ -255,8 +255,17 @@
   }
 }
 </style> 
+
 <!-- Floating Social -->
 <div class="floating-social">
+
+<!-- Mobile Toggle Button -->
+<div class="social-toggle">
+<i class="fas fa-share-alt"></i>
+</div>
+
+<!-- Social Links -->
+<div class="social-links">
 
 <a href="https://www.linkedin.com/in/ngumo-mwangi/" class="linkedin"><i class="fab fa-linkedin"></i></a>
 <a href="https://www.instagram.com/Ngumo_Mwangi" class="instagram"><i class="fab fa-instagram"></i></a>
@@ -269,33 +278,41 @@
 <a href="https://t.me/Ngumo_Mwangi" class="telegram"><i class="fab fa-telegram"></i></a>
 <a href="https://www.pinterest.com/Ngumo_Mwangi" class="pinterest"><i class="fab fa-pinterest"></i></a>
 
+</div>
+
 <style>
 
-/* ===== FLOATING SOCIAL BASE ===== */
+/* ===== BASE ===== */
 
 .floating-social{
 position:fixed;
 top:50%;
 left:0;
-transform:translateY(-50%) translateX(-80px);
-display:flex;
-flex-direction:column;
-gap:10px;
-opacity:0;
-pointer-events:none;
-transition:opacity .5s ease, transform .5s ease;
+transform:translateY(-50%);
 z-index:9999;
 }
 
-.floating-social.show{
+/* LINKS */
+
+.social-links{
+display:flex;
+flex-direction:column;
+gap:10px;
+transform:translateX(-80px);
+transition:.4s;
+opacity:0;
+pointer-events:none;
+}
+
+.floating-social.show .social-links{
+transform:translateX(12px);
 opacity:1;
 pointer-events:auto;
-transform:translateY(-50%) translateX(12px);
 }
 
 /* ICON STYLE */
 
-.floating-social a{
+.social-links a{
 width:52px;
 height:52px;
 background:#222;
@@ -304,13 +321,13 @@ border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-text-decoration:none;
 font-size:22px;
-transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
+text-decoration:none;
+transition:.3s;
 }
 
-.floating-social a:hover{
-transform:scale(1.25) rotate(3deg);
+.social-links a:hover{
+transform:scale(1.2);
 box-shadow:0 8px 20px rgba(0,0,0,.35);
 }
 
@@ -319,43 +336,67 @@ box-shadow:0 8px 20px rgba(0,0,0,.35);
 .linkedin:hover{background:#0a66c2;}
 .instagram:hover{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);}
 .twitter:hover{background:#1da1f2;}
-.github:hover{background:#333; box-shadow:0 0 12px #fff;}
+.github:hover{background:#333;}
 .facebook:hover{background:#1877f2;}
-.tiktok:hover{background:#000; box-shadow:0 0 10px #69C9D0;}
+.tiktok:hover{background:#000;}
 .youtube:hover{background:#FF0000;}
-.snapchat:hover{background:#FFFC00; color:#000;}
+.snapchat:hover{background:#FFFC00;color:#000;}
 .telegram:hover{background:#229ED9;}
 .pinterest:hover{background:#E60023;}
 
-/* ===== TABLET ===== */
+/* MOBILE TOGGLE BUTTON */
 
-@media(max-width:900px){
-
-.floating-social a{
-width:46px;
-height:46px;
-font-size:20px;
+.social-toggle{
+display:none;
+position:fixed;
+bottom:25px;
+right:25px;
+width:55px;
+height:55px;
+background:#ffcc00;
+color:#000;
+border-radius:50%;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+z-index:9999;
 }
 
-}
+/* ===== MOBILE MODE ===== */
 
-/* ===== MOBILE ===== */
-
-@media(max-width:600px){
+@media(max-width:768px){
 
 .floating-social{
-gap:8px;
-transform:translateY(-50%) translateX(-65px);
+top:auto;
+left:auto;
+bottom:90px;
+right:25px;
+transform:none;
 }
 
-.floating-social.show{
-transform:translateY(-50%) translateX(8px);
+.social-links{
+flex-direction:column;
+transform:none;
+opacity:0;
+max-height:0;
+overflow:hidden;
 }
 
-.floating-social a{
-width:40px;
-height:40px;
+.floating-social.open .social-links{
+opacity:1;
+max-height:500px;
+}
+
+.social-links a{
+width:45px;
+height:45px;
 font-size:18px;
+}
+
+.social-toggle{
+display:flex;
 }
 
 }
@@ -364,46 +405,53 @@ font-size:18px;
 
 <script>
 
-/* FLOATING SOCIAL VISIBILITY */
+/* DESKTOP SCROLL VISIBILITY */
 
-const floatingSocial=document.querySelector('.floating-social');
+const floatingSocial=document.querySelector(".floating-social");
 
 function toggleFloatingSocial(){
 
+const container=document.querySelector(".container");
+const footer=document.querySelector("footer");
+
+if(!container || !footer) return;
+
 const scrollTop=window.scrollY;
 const windowHeight=window.innerHeight;
-
-const container=document.querySelector('.container');
-const footer=document.querySelector('footer');
-
-if(container && footer){
 
 const containerTop=container.offsetTop;
 const footerTop=footer.offsetTop;
 
 if(scrollTop+windowHeight/2>containerTop && scrollTop+windowHeight/2<footerTop){
 
-floatingSocial.classList.add('show');
+floatingSocial.classList.add("show");
 
 }else{
 
-floatingSocial.classList.remove('show');
+floatingSocial.classList.remove("show");
 
 }
 
 }
 
-}
-
-window.addEventListener('scroll',toggleFloatingSocial);
-window.addEventListener('resize',toggleFloatingSocial);
-
+window.addEventListener("scroll",toggleFloatingSocial);
+window.addEventListener("resize",toggleFloatingSocial);
 toggleFloatingSocial();
+
+
+/* MOBILE EXPAND BUTTON */
+
+const toggle=document.querySelector(".social-toggle");
+
+toggle.addEventListener("click",()=>{
+
+floatingSocial.classList.toggle("open");
+
+});
 
 </script>
 
 </div>
-
 <!-- SCROLL PROGRESS -->
 <div class="scroll-progress"></div>
 
