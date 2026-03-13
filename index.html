@@ -948,12 +948,14 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
 </section>
 
 
- <!-- Hobbies & Interests -->
+<!-- Hobbies & Interests -->
 <section id="hobbies">
-  <h2 class="section-title"><i class="fas fa-star"></i> Hobbies & Interests</h2>
-  <div class="hobbies-grid">
 
-    <!-- MotoGP -->
+<h2 class="section-title"><i class="fas fa-star"></i> Hobbies & Interests</h2>
+
+<div class="hobbies-grid">
+
+<!-- MotoGP -->
     <div class="hobby-item">
       <i class="fas fa-motorcycle hobby-icon"></i>
       <h3>MotoGP</h3>
@@ -1092,9 +1094,9 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       <p>Strengthens collaboration, leadership, and communication skills while fostering trust and motivation within a group.</p>
     </div>
 
-  </div>
+</div>
 
-  <style>
+<style>
 
 /* SECTION */
 
@@ -1197,6 +1199,53 @@ height:170px;
 
 document.addEventListener("DOMContentLoaded",function(){
 
+/* ===== VIDEO SYSTEM ===== */
+
+const videos=document.querySelectorAll(".section-video");
+const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+
+const video=entry.target;
+
+if(entry.isIntersecting){
+
+if(!video.src){
+video.src=video.dataset.src;
+}
+
+if(!isMobile){
+video.play().catch(()=>{});
+}
+
+}else{
+
+video.pause();
+
+}
+
+});
+},{threshold:.5});
+
+videos.forEach(video=>{
+
+observer.observe(video);
+
+if(isMobile){
+
+video.addEventListener("click",()=>{
+if(video.paused){
+video.play();
+}else{
+video.pause();
+}
+});
+
+}
+
+});
+
 
 /* ===== MAP ===== */
 
@@ -1223,6 +1272,7 @@ L.marker(p.coords).addTo(map).bindPopup(p.name);
 });
 
 </script>
+
 </section>
 
     <!-- Future Goals -->
