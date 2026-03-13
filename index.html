@@ -967,20 +967,8 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       <p>Excites me with speed, technical skills, and the thrill of mastering stunts and new challenges.</p>
     </div>
 
-    <!-- Fishing -->
-    <div class="hobby-item">
-      <i class="fas fa-fish hobby-icon"></i>
-      <h3>Fishing</h3>
-      <p>Allows me to relax, connect with nature, and practice patience while reflecting and clearing my mind.</p>
-    </div>
 
-    <!-- Travelling Adventures -->
-    <div class="hobby-item">
-      <i class="fas fa-plane hobby-icon"></i>
-      <h3>Travelling Adventures</h3>
-      <p>Exploring new places, experiencing new cultures, and testing navigation and decision-making skills.</p>
-      <div id="travel-map" style="width:100%; height:250px; border-radius:12px; margin-top:10px;"></div>
-    </div>
+    
 
     <!-- Drawing -->
     <div class="hobby-item">
@@ -988,13 +976,25 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       <h3>Drawing</h3>
       <p>Lets me visually express ideas, concepts, and emotions, and supports creative projects like tattooing and graphics.</p>
     </div>
-
-    <!-- Video Content Creation -->
+<!-- Travelling Adventures -->
     <div class="hobby-item">
-      <i class="fas fa-video hobby-icon"></i>
-      <h3>Video Content Creation</h3>
-      <p>Allows me to tell stories, document experiences, and share knowledge creatively across platforms.</p>
+      <i class="fas fa-plane hobby-icon"></i>
+      <h3>Travelling Adventures</h3>
+      <p>Exploring new places, experiencing new cultures, and testing navigation and decision-making skills.</p>
+      <div id="travel-map" style="width:100%; height:250px; border-radius:12px; margin-top:10px;"></div>
     </div>
+    
+    <!-- Financial Markets -->
+    <div class="hobby-item">
+      <i class="fas fa-chart-line hobby-icon"></i>
+      <h3>Financial Markets</h3>
+      <p>Combines analysis, strategy, and decision-making, helping me understand global systems and investments.</p>
+      <video class="section-video" muted loop playsinline 
+             poster="assets/buda.jpg"
+             src="assets/buda.mp4"
+             data-src="assets/buda.mp4"></video>
+    </div>
+ 
 
     <!-- Graphics -->
     <div class="hobby-item">
@@ -1014,23 +1014,7 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
              data-src="assets/pikini.mp4"></video>
     </div>
 
-    <!-- Songwriting -->
-    <div class="hobby-item">
-      <i class="fas fa-music hobby-icon"></i>
-      <h3>Songwriting</h3>
-      <p>Express emotions, inspire others, and explore creativity through music and lyrics.</p>
-    </div>
-
-    <!-- IT Projects -->
-    <div class="hobby-item">
-      <i class="fas fa-laptop hobby-icon"></i>
-      <h3>IT Projects</h3>
-      <p>Challenges me to solve problems, innovate, and apply technology for functional and creative solutions.</p>
-      <video class="section-video" muted loop playsinline 
-             poster="assets/msee.jpg"
-             src="assets/msee.mp4"
-             data-src="assets/msee.mp4"></video>
-    </div>
+   
 
     <!-- Fashion Design -->
     <div class="hobby-item">
@@ -1039,30 +1023,10 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       <p>Combines creativity, culture, and practical artistry to craft unique, expressive styles.</p>
     </div>
 
-    <!-- Financial Markets -->
-    <div class="hobby-item">
-      <i class="fas fa-chart-line hobby-icon"></i>
-      <h3>Financial Markets</h3>
-      <p>Combines analysis, strategy, and decision-making, helping me understand global systems and investments.</p>
-      <video class="section-video" muted loop playsinline 
-             poster="assets/buda.jpg"
-             src="assets/buda.mp4"
-             data-src="assets/buda.mp4"></video>
-    </div>
 
-    <!-- Swimming -->
-    <div class="hobby-item">
-      <i class="fas fa-swimmer hobby-icon"></i>
-      <h3>Swimming</h3>
-      <p>Keeps me physically fit, improves focus and endurance, and provides a calm, meditative space to recharge my mind.</p>
-    </div>
 
-    <!-- Digital Innovation -->
-    <div class="hobby-item">
-      <i class="fas fa-lightbulb hobby-icon"></i>
-      <h3>Digital Innovation</h3>
-      <p>Inspires me to think creatively, implement solutions, and stay ahead in tech and creativity.</p>
-    </div>
+
+   
 
     <!-- Technology -->
     <div class="hobby-item">
@@ -1094,6 +1058,18 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       <i class="fas fa-users hobby-icon"></i>
       <h3>Team Building</h3>
       <p>Strengthens collaboration, leadership, and communication skills while fostering trust and motivation within a group.</p>
+    </div>
+
+    
+     <!-- IT Projects -->
+    <div class="hobby-item">
+      <i class="fas fa-laptop hobby-icon"></i>
+      <h3>IT Projects</h3>
+      <p>Challenges me to solve problems, innovate, and apply technology for functional and creative solutions.</p>
+      <video class="section-video" muted loop playsinline 
+             poster="assets/msee.jpg"
+             src="assets/msee.mp4"
+             data-src="assets/msee.mp4"></video>
     </div>
 
   </div>
@@ -1128,6 +1104,82 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
       }
     });
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const videos = document.querySelectorAll("video[data-src]");
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  // Keep track of scroll direction
+  let lastScroll = window.scrollY;
+
+  // IntersectionObserver for lazy loading & visibility
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+
+      if(video.dataset.src && !video.src){
+        video.src = video.dataset.src;
+      }
+
+      // Fade effect
+      video.style.transition = "opacity 0.6s ease";
+
+      if(entry.isIntersecting){
+        video.style.opacity = 1;
+      } else {
+        video.style.opacity = 0.2;
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  videos.forEach(video => {
+    video.style.opacity = 0.2;
+    observer.observe(video);
+
+    if(isMobile){
+      video.addEventListener("click", () => {
+        if(video.paused) video.play();
+        else video.pause();
+      });
+    }
+  });
+
+  // Smart auto-play/pause based on scroll direction
+  function smartPlayPause() {
+    const scrollY = window.scrollY;
+    const directionDown = scrollY > lastScroll;
+    lastScroll = scrollY;
+
+    let maxVisible = 0;
+    let videoToPlay = null;
+
+    videos.forEach(video => {
+      const rect = video.getBoundingClientRect();
+      const visible = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+      
+      if(visible > maxVisible){
+        maxVisible = visible;
+        videoToPlay = video;
+      }
+    });
+
+    videos.forEach(video => {
+      if(video === videoToPlay){
+        if(!isMobile) video.play().catch(()=>{});
+      } else {
+        video.pause();
+      }
+    });
+  }
+
+  window.addEventListener("scroll", smartPlayPause);
+  window.addEventListener("resize", smartPlayPause);
+  smartPlayPause(); // initial check
+
+});
+</script>
 
 </section>
 
