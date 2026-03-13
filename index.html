@@ -1114,32 +1114,6 @@ box-shadow:0 8px 20px rgba(0,0,0,0.15);
 
   <script>
     document.addEventListener("DOMContentLoaded", function(){
-      const videos = document.querySelectorAll(".section-video");
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          const video = entry.target;
-          if(entry.isIntersecting){
-            // Lazy load desktop videos
-            if(video.dataset.src && !video.src) video.src = video.dataset.src;
-            // Autoplay desktop
-            if(!isMobile) video.play().catch(()=>{});
-          } else {
-            video.pause();
-          }
-        });
-      }, { threshold: 0.25 });
-
-      videos.forEach(video => {
-        observer.observe(video);
-        if(isMobile){
-          video.addEventListener("click", ()=>{
-            if(video.paused) video.play();
-            else video.pause();
-          });
-        }
-      });
 
       // Map
       if(typeof L !== "undefined"){
